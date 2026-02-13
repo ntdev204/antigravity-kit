@@ -1,7 +1,7 @@
 import Link from "next/link";
-import agents from '@/services/agents.json';
-import skills from '@/services/skills.json';
-import workflows from '@/services/workflows.json';
+import agents from "@/services/agents.json";
+import skills from "@/services/skills.json";
+import workflows from "@/services/workflows.json";
 
 export default function DocsPage() {
     return (
@@ -12,58 +12,84 @@ export default function DocsPage() {
                     Documentation
                 </h1>
                 <p className="text-lg text-zinc-600 dark:text-zinc-400">
-                    Welcome to the <span className="before:-inset-x-1 before:-rotate-1 relative z-4 before:pointer-events-none before:absolute before:inset-y-0 before:z-4 before:bg-linear-to-r before:from-blue-500 before:via-purple-500 before:to-orange-500 before:opacity-16 before:mix-blend-hard-light">
+                    Welcome to the{" "}
+                    <span className="bg-linear-to-r from-blue-500 via-purple-500 to-orange-500 bg-clip-text text-transparent font-semibold">
                         Antigravity Kit
-                    </span> documentation.
+                    </span>{" "}
+                    documentation.
                 </p>
             </div>
 
             {/* What is Antigravity Kit */}
             <section className="mb-12">
                 <h2 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 mb-4">
-                    What is <span className="before:-inset-x-1 before:-rotate-1 relative z-4 before:pointer-events-none before:absolute before:inset-y-0 before:z-4 before:bg-linear-to-r before:from-blue-500 before:via-purple-500 before:to-orange-500 before:opacity-16 before:mix-blend-hard-light">
+                    What is{" "}
+                    <span className="bg-linear-to-r from-blue-500 via-purple-500 to-orange-500 bg-clip-text text-transparent">
                         Antigravity Kit
-                    </span> ?
+                    </span>{" "}
+                    ?
                 </h2>
                 <p className="text-base text-zinc-600 dark:text-zinc-400 mb-4">
-                    <span className="before:-inset-x-1 before:-rotate-1 relative z-4 before:pointer-events-none before:absolute before:inset-y-0 before:z-4 before:bg-linear-to-r before:from-blue-500 before:via-purple-500 before:to-orange-500 before:opacity-16 before:mix-blend-hard-light">
+                    <span className="bg-linear-to-r from-blue-500 via-purple-500 to-orange-500 bg-clip-text text-transparent font-semibold">
                         Antigravity Kit
-                    </span> is a comprehensive collection of AI Agent templates with Skills, Agents, and Workflows designed to supercharge AI coding assistants for{" "}
+                    </span>{" "}
+                    is a comprehensive collection of AI Agent templates with
+                    Skills, Agents, and Workflows designed to supercharge AI
+                    coding assistants for{" "}
                     <a
                         href="https://antigravity.google/t"
                         className="text-zinc-900 dark:text-zinc-50 underline underline-offset-4 decoration-zinc-300 dark:decoration-zinc-700 hover:decoration-zinc-900 dark:hover:decoration-zinc-50 transition-colors"
                     >
                         Antigravity
-                    </a>.
+                    </a>
+                    .
                 </p>
                 <p className="text-base text-zinc-600 dark:text-zinc-400 mb-4">
-                    Whether you're an individual developer or part of a larger team, Antigravity Kit helps you build better software faster with {skills.length}+ skills, {agents.length}+ specialist agents, and {workflows.length}+ production-ready workflows.
+                    Whether you&apos;re an individual developer or part of a
+                    larger team, Antigravity Kit helps you build better software
+                    faster with {skills.length}+ skills, {agents.length}+
+                    specialist agents, and {workflows.length}+ production-ready
+                    workflows.
                 </p>
             </section>
 
             {/* What's Included */}
             <section className="mb-12">
                 <h2 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 mb-4">
-                    What's Included
+                    What&apos;s Included
                 </h2>
                 <div className="grid gap-4 sm:grid-cols-3 mb-6">
                     <div className="p-6 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900">
-                        <div className="text-3xl font-bold text-zinc-900 dark:text-zinc-50 mb-2">{agents.length}+</div>
-                        <div className="text-sm font-medium text-zinc-600 dark:text-zinc-400">Specialist Agents</div>
+                        <div className="text-3xl font-bold text-zinc-900 dark:text-zinc-50 mb-2">
+                            {agents.length}+
+                        </div>
+                        <div className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
+                            Specialist Agents
+                        </div>
                         <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-2">
-                            Domain experts for frontend, backend, security, and more
+                            Domain experts for frontend, backend, security, and
+                            more
                         </p>
                     </div>
                     <div className="p-6 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900">
-                        <div className="text-3xl font-bold text-zinc-900 dark:text-zinc-50 mb-2">{skills.length}+</div>
-                        <div className="text-sm font-medium text-zinc-600 dark:text-zinc-400">Domain Skills</div>
+                        <div className="text-3xl font-bold text-zinc-900 dark:text-zinc-50 mb-2">
+                            {skills.length}+
+                        </div>
+                        <div className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
+                            Domain Skills
+                        </div>
                         <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-2">
-                            Knowledge modules for React, Next.js, testing, and more
+                            Knowledge modules for React, Next.js, testing, and
+                            more
                         </p>
                     </div>
                     <div className="p-6 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900">
-                        <div className="text-3xl font-bold text-zinc-900 dark:text-zinc-50 mb-2">{workflows.length}+</div>
-                        <div className="text-sm font-medium text-zinc-600 dark:text-zinc-400">Workflows</div>
+                        <div className="text-3xl font-bold text-zinc-900 dark:text-zinc-50 mb-2">
+                            {workflows.length}+
+                        </div>
+                        <div className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
+                            Workflows
+                        </div>
                         <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-2">
                             Slash command procedures for common dev tasks
                         </p>
@@ -81,15 +107,22 @@ export default function DocsPage() {
                 </p>
                 <div className="space-y-4 mb-6">
                     <div className="p-4 rounded-lg border border-zinc-200 dark:border-zinc-800">
-                        <Link href="/docs/installation" className="font-semibold text-zinc-900 dark:text-zinc-50 hover:underline">
+                        <Link
+                            href="/docs/installation"
+                            className="font-semibold text-zinc-900 dark:text-zinc-50 hover:underline"
+                        >
                             Getting Started
                         </Link>
                         <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1">
-                            Quick installation and setup guide to get you started
+                            Quick installation and setup guide to get you
+                            started
                         </p>
                     </div>
                     <div className="p-4 rounded-lg border border-zinc-200 dark:border-zinc-800">
-                        <Link href="/docs/agents" className="font-semibold text-zinc-900 dark:text-zinc-50 hover:underline">
+                        <Link
+                            href="/docs/agents"
+                            className="font-semibold text-zinc-900 dark:text-zinc-50 hover:underline"
+                        >
                             Core Concepts
                         </Link>
                         <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1">
@@ -97,7 +130,10 @@ export default function DocsPage() {
                         </p>
                     </div>
                     <div className="p-4 rounded-lg border border-zinc-200 dark:border-zinc-800">
-                        <Link href="/docs/cli" className="font-semibold text-zinc-900 dark:text-zinc-50 hover:underline">
+                        <Link
+                            href="/docs/cli"
+                            className="font-semibold text-zinc-900 dark:text-zinc-50 hover:underline"
+                        >
                             CLI Reference
                         </Link>
                         <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1">
@@ -106,7 +142,11 @@ export default function DocsPage() {
                     </div>
                 </div>
                 <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                    Use the sidebar to navigate through sections, or use <kbd className="px-2 py-1 text-xs font-mono rounded bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700">Ctrl+K</kbd> to quickly search.
+                    Use the sidebar to navigate through sections, or use{" "}
+                    <kbd className="px-2 py-1 text-xs font-mono rounded bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700">
+                        Ctrl+K
+                    </kbd>{" "}
+                    to quickly search.
                 </p>
             </section>
 
@@ -121,7 +161,9 @@ export default function DocsPage() {
                         className="group p-6 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-all"
                     >
                         <div className="flex items-center justify-between mb-2">
-                            <h3 className="font-semibold text-zinc-900 dark:text-zinc-50">Installation →</h3>
+                            <h3 className="font-semibold text-zinc-900 dark:text-zinc-50">
+                                Installation →
+                            </h3>
                         </div>
                         <p className="text-sm text-zinc-600 dark:text-zinc-400">
                             Get started with Antigravity Kit in under a minute
@@ -132,7 +174,9 @@ export default function DocsPage() {
                         className="group p-6 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-all"
                     >
                         <div className="flex items-center justify-between mb-2">
-                            <h3 className="font-semibold text-zinc-900 dark:text-zinc-50">Learn Core Concepts →</h3>
+                            <h3 className="font-semibold text-zinc-900 dark:text-zinc-50">
+                                Learn Core Concepts →
+                            </h3>
                         </div>
                         <p className="text-sm text-zinc-600 dark:text-zinc-400">
                             Understand how Agents, Skills, and Workflows work
@@ -151,8 +195,18 @@ export default function DocsPage() {
                     className="text-sm font-medium text-zinc-900 dark:text-zinc-50 hover:underline flex items-center gap-1"
                 >
                     Installation
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 5l7 7-7 7"
+                        />
                     </svg>
                 </Link>
             </div>

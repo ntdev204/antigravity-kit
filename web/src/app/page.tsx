@@ -455,12 +455,13 @@ const AntigravityGoogle = () => {
 };
 
 import Typing from "@/components/typing";
+import Image from "next/image";
 
 export default function Home() {
     return (
         <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
             <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-                <img
+                <Image
                     className="dark:invert"
                     src="/images/logo.png"
                     alt="Antigravity Kit logo"
@@ -468,8 +469,8 @@ export default function Home() {
                     height={20}
                 />
                 <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-                    <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-                        <span className="before:-inset-x-1 before:-rotate-1 relative z-4 before:pointer-events-none before:absolute before:inset-y-0 before:z-4 before:bg-linear-to-r before:from-blue-500 before:via-cyan-500 before:to-orange-500 before:opacity-16 before:mix-blend-hard-light">
+                    <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight">
+                        <span className="bg-linear-to-r from-blue-500 via-cyan-500 to-orange-500 bg-clip-text text-transparent">
                             Antigravity Kit
                         </span>
                     </h1>
@@ -477,7 +478,7 @@ export default function Home() {
                         AI Agent templates with Skills, Agents, and Workflows
                         for{" "}
                         <a
-                            href="https://antigravity.google/t"
+                            href="https://antigravity.google/"
                             className="inline-flex items-center align-middle font-medium text-zinc-950 dark:text-zinc-50 mb-2"
                             target="_blank"
                             rel="noopener noreferrer"
@@ -489,7 +490,7 @@ export default function Home() {
                 </div>
                 <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
                     <a
-                        className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
+                        className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-39.5"
                         href="https://github.com/ntdev204/antigravity-kit"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -498,7 +499,7 @@ export default function Home() {
                         GitHub
                     </a>
                     <Link
-                        className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
+                        className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-39.5"
                         href="/docs"
                     >
                         Documentation
