@@ -43,21 +43,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved context efficiency with on-demand reference loading
 - Core decision trees remain in SKILL.md, detailed specs moved to `references/`
 
-## [2.0.1] - 2026-01-26
-
-### Added
-
-- **Agent Flow Documentation**: New comprehensive workflow documentation
-- **New Skills**: `react-best-practices`, `web-design-guidelines`
-
-### Changed
-
-- **Skill Consolidation**: Merged `nextjs-best-practices` and `react-patterns` into unified `react-best-practices`
-
-## [2.0.0] - Initial Release
-
-- Initial release with 20 agents, 37 skills, 11 workflows
-
-[2.3.0]: https://github.com/ntdev204/antigravity-kit/compare/v2.0.1...v2.3.0
-[2.0.1]: https://github.com/ntdev204/antigravity-kit/compare/v2.0.0...v2.0.1
-[2.0.0]: https://github.com/ntdev204/antigravity-kit/releases/tag/v2.0.0
+[2.0.0]: https://github.com/ntdev204/antigravity-kit/releases/tag/v2.3.0
