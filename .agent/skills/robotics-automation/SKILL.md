@@ -5,362 +5,333 @@ description: Robotics systems and industrial automation design. Robot types, loc
 
 # Robotics & Automation
 
-> Principles for designing intelligent robotic and automated systems.
+> Systematic approach to designing robotic systems and industrial automation.
+
+## 1. Robot Selection
+
+| Application           | Robot Type            | Payload     | Reach           | Speed      |
+| --------------------- | --------------------- | ----------- | --------------- | ---------- |
+| **Pick & Place**      | SCARA, Delta          | 1-20 kg     | 0.5-1.5 m       | Very High  |
+| **Assembly**          | Collaborative (Cobot) | 3-20 kg     | 0.5-1.3 m       | Medium     |
+| **Welding**           | 6-axis Articulated    | 5-150 kg    | 1-3 m           | Medium     |
+| **Palletizing**       | 4-6 axis Articulated  | 50-500 kg   | 2-4 m           | Medium     |
+| **Inspection**        | Cartesian/Gantry      | Variable    | Large workspace | Low-Medium |
+| **Material Handling** | AMR, AGV              | 100-2000 kg | Facility-wide   | Low        |
+| **Painting/Coating**  | 6-7 axis Articulated  | 10-30 kg    | 2-3.5 m         | High       |
 
 ---
 
-## 1. Robot Types & Applications
+## 2. Robot Components Decision Tree
+
+```
+Need perception?
+├─ Yes → Vision (2D/3D), LiDAR, force sensors
+└─ No → Position encoders only
+
+Precision requirement?
+├─ High (< 0.1mm) → Servo motors, absolute encoders
+├─ Medium (0.1-1mm) → Stepper motors, incremental encoders
+└─ Low (> 1mm) → DC motors, limit switches
+
+Force control needed?
+├─ Yes → Force/torque sensors (6-axis)
+└─ No → Standard position control
+
+Environment?
+├─ Clean room → IP54+, stainless steel
+├─ Harsh (dust, water) → IP65-67, sealed components
+└─ Standard → IP40, standard materials
+```
+
+**For detailed component specs, see [components.md](references/components.md)**
+
+---
+
+## 3. Locomotion Selection
 
 ### Mobile Robots
 
-| Type                | Characteristics                  | Applications                        |
-| ------------------- | -------------------------------- | ----------------------------------- |
-| **Wheeled**         | Fast, efficient on flat surfaces | Warehouses, delivery, inspection    |
-| **Tracked**         | High traction, rough terrain     | Military, agriculture, construction |
-| **Legged**          | Navigate obstacles, stairs       | Research, search and rescue         |
-| **Aerial (Drones)** | 3D mobility, aerial view         | Surveillance, delivery, inspection  |
-| **Underwater**      | Aquatic navigation               | Marine research, inspection         |
+| Type                     | Terrain       | Accuracy | Complexity | Use Cases                      |
+| ------------------------ | ------------- | -------- | ---------- | ------------------------------ |
+| **Differential Drive**   | Flat          | Medium   | Low        | Indoor warehouses              |
+| **Ackermann (Car-like)** | Flat/outdoor  | High     | Medium     | Outdoor delivery               |
+| **Mecanum/Omni**         | Flat          | Medium   | Highโ      | Tight spaces, sideway movement |
+| **Tracked**              | Rough terrain | Low      | Medium     | Outdoor, uneven ground         |
+| **Legged (Quadruped)**   | Very rough    | Medium   | Very High  | Stairs, obstacles              |
 
-### Manipulators
+### Navigation Methods
 
-| Type              | DOF | Workspace     | Applications                |
-| ----------------- | --- | ------------- | --------------------------- |
-| **Cartesian**     | 3   | Rectangular   | Pick-and-place, 3D printing |
-| **SCARA**         | 4   | Cylindrical   | Assembly, packaging         |
-| **Articulated**   | 6+  | Complex       | Welding, painting, assembly |
-| **Delta**         | 3-4 | Inverted cone | High-speed picking          |
-| **Collaborative** | 6-7 | Human-safe    | Assembly, inspection        |
+- **AGV (Automated Guided Vehicle)**: Magnetic tape, wire-guided (fixed paths)
+- **AMR (Autonomous Mobile Robot)**: SLAM, vision (flexible paths)
+- **Hybrid**: Combination of both
 
 ---
 
-## 2. Robot Components
+## 4. Industrial Automation Architecture (ISA-95)
 
-### Actuation Systems
+### Automation Pyramid
 
-| Type                 | Characteristics             | Use Cases                 |
-| -------------------- | --------------------------- | ------------------------- |
-| **DC Motors**        | Simple, continuous rotation | Wheels, conveyors         |
-| **Servo Motors**     | Precise position control    | Arms, grippers            |
-| **Stepper Motors**   | Discrete steps, no feedback | 3D printers, CNC          |
-| **Brushless Motors** | High efficiency, power      | Drones, high-performance  |
-| **Linear Actuators** | Linear motion               | Lifts, sliding mechanisms |
-| **Pneumatic**        | Fast, simple                | Grippers, pistons         |
-| **Hydraulic**        | High force                  | Heavy machinery           |
+```
+Level 4: Enterprise (ERP)
+          ↓
+Level 3: MES (Manufacturing Execution)
+          ↓
+Level 2: SCADA/HMI (Supervision)
+          ↓
+Level 1: PLC/DCS (Control)
+          ↓
+Level 0: Sensors/Actuators (Field Devices)
+```
 
-### Sensors
+### Control System Selection
 
-| Category           | Sensors                     | Purpose              |
-| ------------------ | --------------------------- | -------------------- |
-| **Proprioception** | Encoders, IMU, force/torque | Internal state       |
-| **Exteroception**  | Camera, LIDAR, ultrasonic   | External environment |
-| **Localization**   | GPS, wheel odometry, SLAM   | Position tracking    |
-| **Safety**         | Proximity, force sensors    | Collision avoidance  |
+| System                 | Complexity | Cost       | Flexibility | Use Cases              |
+| ---------------------- | ---------- | ---------- | ----------- | ---------------------- |
+| **Relay Logic**        | Very Low   | Low        | Very Low    | Simple ON/OFF          |
+| **PLC (Ladder)**       | Low        | Medium     | Medium      | Discrete manufacturing |
+| **PLC (ST/FBD)**       | Medium     | Medium     | High        | Process control        |
+| **DCS**                | High       | High       | High        | Continuous processes   |
+| **PAC**                | High       | High       | Very High   | Motion + process       |
+| **PC-Based (TwinCAT)** | Medium     | Low-Medium | Very High   | Motion control, custom |
 
----
-
-## 3. Locomotion Systems
-
-### Wheeled Locomotion
-
-| Configuration          | Characteristics    | Applications        |
-| ---------------------- | ------------------ | ------------------- |
-| **Differential Drive** | Two wheels, simple | Simple robots, toys |
-| **Ackermann Steering** | Car-like steering  | Autonomous vehicles |
-| **Mecanum Wheels**     | Omnidirectional    | Warehouses, AGVs    |
-| **Skid Steering**      | Tank-like          | Rough terrain       |
-
-### Legged Locomotion
-
-| Type          | Stability      | Complexity | Use Cases             |
-| ------------- | -------------- | ---------- | --------------------- |
-| **Bipedal**   | Dynamic        | Very high  | Humanoids, research   |
-| **Quadruped** | Static/dynamic | High       | Boston Dynamics Spot  |
-| **Hexapod**   | Static         | Medium     | Stable walking robots |
+**For PLC programming and SCADA details, see [plc-scada.md](references/plc-scada.md)**
 
 ---
 
-## 4. Industrial Automation Architecture
+## 5. Communication Protocols
 
-### ISA-95 Automation Pyramid
+### Protocol Selection Matrix
 
-| Level              | Function           | Systems            | Timeframe       |
-| ------------------ | ------------------ | ------------------ | --------------- |
-| **5: Enterprise**  | Business planning  | ERP (SAP, Oracle)  | Months-years    |
-| **4: Operations**  | Site operations    | MES                | Days-weeks      |
-| **3: Supervisory** | Production control | SCADA, HMI         | Hours-days      |
-| **2: Control**     | Real-time control  | PLC, DCS           | Seconds-minutes |
-| **1: Field**       | Sensing, actuation | Sensors, actuators | Milliseconds    |
+| Need                   | Protocol    | Speed     | Distance     | Devices        |
+| ---------------------- | ----------- | --------- | ------------ | -------------- |
+| **Simple device**      | Modbus RTU  | 19.2 kbps | 1200m        | 247            |
+| **Ethernet-based**     | Modbus TCP  | 100 Mbps  | Network      | Unlimited      |
+| **Siemens ecosystem**  | PROFINET    | 100 Mbps+ | 100m/segment | 512            |
+| **Rockwell ecosystem** | EtherNet/IP | 100 Mbps  | 100m/segment | Large          |
+| **Cross-platform**     | OPC UA      | Variable  | Network      | Unlimited      |
+| **Sensor level**       | IO-Link     | 230 kbps  | 20m          | Point-to-point |
 
 ---
 
-## 5. PLC Systems
+## 6. Design Workflow
 
-### Major PLC Brands
+### Phase 1: Requirements Analysis
 
-| Brand             | Series                     | Strengths                |
-| ----------------- | -------------------------- | ------------------------ |
-| **Siemens**       | S7-1200, S7-1500           | Performance, integration |
-| **Allen-Bradley** | CompactLogix, ControlLogix | North America standard   |
-| **Mitsubishi**    | FX, Q series               | Compact, reliable        |
-| **Schneider**     | Modicon M580               | Energy management        |
-| **Omron**         | CJ, NJ series              | Motion control           |
+**Questions to Ask:**
+
+1. What is the task? (pick, place, assemble, inspect, transport)
+2. What are the objects? (weight, size, material, fragility)
+3. Cycle time requirement?
+4. Accuracy/repeatability requirement?
+5. Environment? (temperature, cleanliness, safety)
+6. Integration needs? (existing systems, data exchange)
+
+### Phase 2: Conceptual Design
+
+1. **Robot selection** (see section 1)
+2. **End effector design** (gripper type)
+3. **Workspace layout** (reach analysis, collision avoidance)
+4. **Safety assessment** (risk analysis, ISO 13849)
+
+### Phase 3: Detailed Design
+
+1. **Component specification** (motors, sensors, controllers)
+2. **Control architecture** (PLC program structure)
+3. **Network design** (topology, redundancy)
+4. **HMI design** (operator interface)
+
+### Phase 4: Implementation
+
+1. **Mechanical assembly**
+2. **Electrical wiring** (follow schematics)
+3. **PLC programming** (ladder, ST, FBD)
+4. **HMI development**
+5. **Network configuration**
+
+### Phase 5: Commissioning
+
+1. **FAT (Factory Acceptance Test)**
+2. **SAT (Site Acceptance Test)**
+3. **Operator training**
+4. **Documentation handover**
+
+**For commissioning details, see [integration.md](references/integration.md)**
+
+---
+
+## 7. Safety Standards
+
+### Risk Assessment (ISO 12100)
+
+1. **Identify hazards** (crushing, cutting, collision)
+2. **Estimate risk** (severity × probability)
+3. **Reduce risk** (eliminate → guards → warnings)
+4. **Verify** (validate residual risk acceptable)
+
+### Safety Levels
+
+| Level       | Application    | Examples                      |
+| ----------- | -------------- | ----------------------------- |
+| **PLa-PLb** | Slight injury  | Light curtains (non-critical) |
+| **PLc**     | Serious injury | Two-hand control              |
+| **PLd**     | Serious injury | Safeguarded robot cells       |
+| **PLe**     | Death          | Critical safety systems       |
+
+### Collaborative Robots (ISO/TS 15066)
+
+**Safety Functions:**
+
+- Safety-rated monitored stop
+- Hand guiding
+- Speed and separation monitoring
+- Power and force limiting
+
+---
+
+## 8. Programming Approaches
+
+### Robot Programming Methods
+
+| Method                  | Flexibility | Programming Time | Use Cases                 |
+| ----------------------- | ----------- | ---------------- | ------------------------- |
+| **Teach Pendant**       | Low         | Fast             | Repetitive tasks          |
+| **Offline Programming** | High        | Medium           | Complex paths, simulation |
+| **Vision-Guided**       | Very High   | Medium           | Variable positions        |
+| **Force-Guided**        | High        | Long             | Assembly, polishing       |
 
 ### PLC Programming Languages (IEC 61131-3)
 
-| Language                            | Type       | Use Cases                       |
-| ----------------------------------- | ---------- | ------------------------------- |
-| **Ladder Logic (LD)**               | Graphical  | Relay replacement, simple logic |
-| **Function Block (FBD)**            | Graphical  | Process control, data flow      |
-| **Structured Text (ST)**            | Text-based | Complex algorithms, math        |
-| **Sequential Function Chart (SFC)** | Graphical  | Sequential processes            |
-| **Instruction List (IL)**           | Text-based | Low-level optimization          |
+- **Ladder Logic (LD)**: Simple Boolean, relay replacement
+- **Function Block (FBD)**: Process control, reusable blocks
+- **Structured Text (ST)**: Complex algorithms, loops
+- **Sequential Function Chart (SFC)**: State machines, batch
+- **Instruction List (IL)**: Low-level (rarely used)
 
 ---
 
-## 6. SCADA Systems
+## 9. System Integration
 
-### SCADA Architecture
-
-| Component         | Function                                 |
-| ----------------- | ---------------------------------------- |
-| **HMI**           | Human-machine interface, visualization   |
-| **RTU/PLC**       | Remote terminal units, field controllers |
-| **Communication** | Network protocols (Modbus, OPC)          |
-| **Historian**     | Data logging, trending                   |
-| **Alarm System**  | Event notification                       |
-
-### Popular SCADA Platforms
-
-| Platform        | Vendor               | Strengths                      |
-| --------------- | -------------------- | ------------------------------ |
-| **WinCC**       | Siemens              | Integration with Siemens PLCs  |
-| **Ignition**    | Inductive Automation | Web-based, unlimited licensing |
-| **Wonderware**  | AVEVA                | Mature, widely used            |
-| **FactoryTalk** | Rockwell             | Integration with Allen-Bradley |
-
----
-
-## 7. Industrial Communication Protocols
-
-### Fieldbuses
-
-| Protocol        | Speed    | Distance | Applications           |
-| --------------- | -------- | -------- | ---------------------- |
-| **Profibus**    | 12 Mbps  | 1200m    | Siemens ecosystem      |
-| **Profinet**    | 100 Mbps | 100m     | Ethernet-based Siemens |
-| **EtherNet/IP** | 100 Mbps | 100m     | Rockwell Automation    |
-| **Modbus RTU**  | 115 kbps | 1200m    | Legacy systems         |
-| **Modbus TCP**  | 100 Mbps | Ethernet | Modern systems         |
-| **CANopen**     | 1 Mbps   | 40m      | Motion control         |
-
-### Industrial Ethernet
-
-| Protocol        | Real-time      | Vendor   |
-| --------------- | -------------- | -------- |
-| **Profinet**    | Yes            | Siemens  |
-| **EtherNet/IP** | Yes            | Rockwell |
-| **EtherCAT**    | Hard real-time | Beckhoff |
-| **Powerlink**   | Hard real-time | B&R      |
-
----
-
-## 8. Automation Design Patterns
-
-### Sequential Control
+### IT/OT Integration
 
 ```
-State Machine Pattern:
-- IDLE → START → RUNNING → STOPPING → IDLE
-- Each state has entry/exit actions
-- Transitions based on conditions
+ERP (SAP, Oracle)
+      ↓
+MES (Production Management)
+      ↓
+SCADA (Visualization)
+      ↓
+PLC (Control)
+      ↓
+Field Devices
 ```
-
-### Batch Processing
-
-```
-ISA-88 Batch Control:
-- Recipe management
-- Equipment phases
-- Process stages
-- Material tracking
-```
-
-### Continuous Control
-
-```
-Feedback Control Loops:
-- PID controllers
-- Cascade control
-- Feedforward control
-```
-
----
-
-## 9. Robot Programming Approaches
-
-### Teaching Methods
-
-| Method                  | Characteristics       | Use Cases                   |
-| ----------------------- | --------------------- | --------------------------- |
-| **Manual Teaching**     | Move robot physically | Simple paths, prototyping   |
-| **Teach Pendant**       | Joystick programming  | Traditional industrial      |
-| **Lead-Through**        | Force feedback        | Collaborative robots        |
-| **Offline Programming** | Software simulation   | Complex paths, optimization |
-
-### Programming Paradigms
-
-| Paradigm            | Description         | Examples                |
-| ------------------- | ------------------- | ----------------------- |
-| **Point-to-Point**  | Defined waypoints   | Pick-and-place          |
-| **Continuous Path** | Smooth trajectories | Welding, painting       |
-| **Force Control**   | Force feedback      | Assembly, polishing     |
-| **Vision-Guided**   | Camera-based        | Bin picking, inspection |
-
----
-
-## 10. Safety Systems
-
-### Safety Standards
-
-| Standard      | Scope                   |
-| ------------- | ----------------------- |
-| **ISO 10218** | Industrial robots       |
-| **ISO 13849** | Safety-related controls |
-| **IEC 62061** | Functional safety       |
-| **ISO 15066** | Collaborative robots    |
-
-### Safety Devices
-
-| Device             | Function             |
-| ------------------ | -------------------- |
-| **E-Stop**         | Emergency shutdown   |
-| **Light Curtains** | Perimeter protection |
-| **Safety PLCs**    | Redundant control    |
-| **Safety Relays**  | Fail-safe switching  |
-| **Laser Scanners** | Area monitoring      |
-
-### Safety Integrity Levels (SIL)
-
-| Level     | Risk Reduction | Applications    |
-| --------- | -------------- | --------------- |
-| **SIL 1** | 10-100x        | Low risk        |
-| **SIL 2** | 100-1000x      | Medium risk     |
-| **SIL 3** | 1000-10000x    | High risk       |
-| **SIL 4** | >10000x        | Critical safety |
-
----
-
-## 11. Motion Control
-
-### Motion Profile Types
-
-| Type               | Characteristics     | Use Cases           |
-| ------------------ | ------------------- | ------------------- |
-| **Trapezoidal**    | Simple, predictable | Point-to-point      |
-| **S-Curve**        | Smooth acceleration | High precision      |
-| **Synchronized**   | Coordinated axes    | Multi-axis systems  |
-| **Electronic Cam** | Following master    | Packaging, printing |
-
-### Motion Controllers
-
-| Type               | Characteristics              |
-| ------------------ | ---------------------------- |
-| **Standalone**     | Independent motion control   |
-| **PLC-integrated** | Combined logic and motion    |
-| **CNC**            | Complex machining operations |
-| **Servo Drives**   | Closed-loop position control |
-
----
-
-## 12. Gripper & End Effector Design
-
-### Gripper Types
-
-| Type             | Mechanism        | Applications               |
-| ---------------- | ---------------- | -------------------------- |
-| **Parallel Jaw** | Two-finger grasp | Standard parts             |
-| **Three-Jaw**    | Centered grip    | Cylindrical parts          |
-| **Vacuum**       | Suction          | Flat, smooth surfaces      |
-| **Magnetic**     | Magnetic force   | Ferrous materials          |
-| **Soft Gripper** | Compliant        | Fragile, irregular objects |
-
-### Selection Criteria
-
-- Object shape and size
-- Weight capacity
-- Surface material
-- Precision requirements
-- Speed requirements
-
----
-
-## 13. System Integration
-
-### Integration Layers
-
-1. **Field Layer** - Sensors, actuators, drives
-2. **Control Layer** - PLCs, motion controllers
-3. **Supervisory Layer** - SCADA, HMI
-4. **Information Layer** - MES, databases
-5. **Enterprise Layer** - ERP, business systems
 
 ### Data Flow
 
+- **Upward**: Sensor data → PLC → SCADA → MES → ERP
+- **Downward**: Production orders → MES → SCADA → PLC setpoints
+
+**For integration procedures, see [integration.md](references/integration.md)**
+
+---
+
+## 10. Common Design Patterns
+
+### Pattern 1: Conveyor Control
+
+**Components:**
+
+- Motor (VFD or contactor)
+- Proximity sensors (part detection)
+- PLC logic (interlock, sequence)
+
+**Logic:**
+
 ```
-Sensor → PLC → SCADA → MES → ERP
-   ↕         ↕       ↕      ↕      ↕
-Actuator ← PLC ← HMI ← DB ← Analytics
+IF (upstream_ready AND downstream_clear AND no_fault) THEN
+    Run_Conveyor = TRUE
+ELSE
+    Run_Conveyor = FALSE
+END_IF
 ```
 
----
+### Pattern 2: Pick-and-Place
 
-## 14. Commissioning & Testing
+**Steps:**
 
-### Testing Phases
+1. Home position
+2. Move to pick location (vision-guided)
+3. Close gripper
+4. Verify grip (vacuum/force sensor)
+5. Move to place location
+6. Open gripper
+7. Return to home
 
-| Phase          | Focus              | Methods                |
-| -------------- | ------------------ | ---------------------- |
-| **FAT**        | Factory Acceptance | Functional testing     |
-| **SAT**        | Site Acceptance    | Integration testing    |
-| **Dry Run**    | Without material   | Logic verification     |
-| **Wet Run**    | With material      | Performance validation |
-| **Production** | Full operation     | Continuous monitoring  |
+### Pattern 3: Palletizing
 
----
+**Pattern generation:**
 
-## 15. Maintenance Strategies
-
-### Maintenance Types
-
-| Type             | Trigger         | Efficiency |
-| ---------------- | --------------- | ---------- |
-| **Reactive**     | After failure   | Low        |
-| **Preventive**   | Schedule-based  | Medium     |
-| **Predictive**   | Condition-based | High       |
-| **Prescriptive** | AI-driven       | Very high  |
-
-### Monitoring Parameters
-
-- Vibration analysis
-- Temperature trends
-- Current consumption
-- Cycle times
-- Error rates
+- Layer pattern definition (e.g., 4x3 grid)
+- Z-height increment per layer
+- Rotation (if needed)
 
 ---
 
-## 16. Common Pitfalls
+## 11. Performance Metrics
 
-| Problem                   | Solution                                   |
-| ------------------------- | ------------------------------------------ |
-| **Insufficient safety**   | Design safety from start, follow standards |
-| **Poor cable management** | Plan routing, use cable chains             |
-| **Vibration issues**      | Proper mounting, dampening                 |
-| **Communication errors**  | Proper shielding, termination              |
-| **Inadequate testing**    | Comprehensive FAT/SAT procedures           |
-| **No documentation**      | Maintain as-built drawings                 |
-| **Poor HMI design**       | User-centered design, consistency          |
+### OEE (Overall Equipment Effectiveness)
+
+```
+OEE = Availability × Performance × Quality
+
+Availability = Uptime / Planned Production Time
+Performance = Actual Output / Theoretical Max Output
+Quality = Good Parts / Total Parts
+```
+
+**Target**: 85%+ (world-class)
+
+### Cycle Time Optimization
+
+1. **Minimize travel distance** (optimize layout)
+2. **Parallel operations** (multi-robot, overlapping)
+3. **Tune motion profiles** (acceleration, jerk limits)
+4. **Reduce non-value time** (grippening/release)
 
 ---
 
-> **Remember:** Safety first, test thoroughly, document everything. Industrial systems require reliability and traceability above all else.
+## 12. Quick Start Checklist
+
+- [ ] Define task and requirements
+- [ ] Select robot type and size (section 1)
+- [ ] Choose sensors and actuators (section 2)
+- [ ] Design workspace layout
+- [ ] Conduct safety risk assessment (section 7)
+- [ ] Select control architecture (PLC, DCS, PAC)
+- [ ] Design network topology
+- [ ] Program PLC logic
+- [ ] Develop HMI
+- [ ] Plan commissioning (FAT, SAT)
+- [ ] Prepare documentation
+
+---
+
+## 13. Common Pitfalls
+
+| Problem                     | Solution                                 |
+| --------------------------- | ---------------------------------------- |
+| **Under-spec'd robot**      | Add safety margin (1.5-2x payload/speed) |
+| **Poor cable management**   | Use cable carriers, strain relief        |
+| **No redundancy**           | Add backup for critical systems          |
+| **Inadequate grounding**    | Proper grounding reduces EMI issues      |
+| **Skipped risk assessment** | Always perform before commissioning      |
+| **No documentation**        | Maintain as-built drawings, backups      |
+
+---
+
+> **Philosophy:** Safety first, then reliability, then performance. Design for maintenance from day one.
+
+## References
+
+- [plc-scada.md](references/plc-scada.md) - PLC programming, SCADA platforms, protocols
+- [components.md](references/components.md) - Sensors, actuators, grippers, motion control
+- [integration.md](references/integration.md) - Commissioning, testing, troubleshooting
