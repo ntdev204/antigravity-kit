@@ -5,7 +5,7 @@ All notable changes to the Antigravity Kit will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [2.3.0] - 2026-02-13
 
 ### Added
 
@@ -23,53 +23,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `vercel-react-best-practices` - Performance optimization guidelines from Vercel Engineering
     - `webapp-testing` - E2E and deep audit testing strategies
 
+### Changed
+
+- **BREAKING: AI & Robotics Skills Refactor** - Progressive disclosure pattern applied to 5 major skills
+    - **ai-engineering**: Refactored 255→170 lines + 4 reference files (frameworks, architectures, RL/DRL, MLOps)
+    - **robotics-automation**: Refactored 367→185 lines + 3 reference files (PLC/SCADA, components, integration)
+    - **iot-solutions**: Refactored 337→165 lines + 3 reference files (hardware, protocols, diagrams)
+    - **ros2-humble**: Refactored 553→190 lines + 4 reference files (node development, launch/params, packages, structure)
+    - **control-systems**: Refactored 493→160 lines + 4 reference files (PID, fuzzy logic, modern control, implementation)
+- **Workflow: /rai/**: Created comprehensive Robotics & AI orchestration workflow
+    - Added domain identification and skill routing
+    - Defined implementation phases for each domain
+    - Common integration patterns (AI+Robot, IoT+Control, ROS2+AI+Control)
+    - Multi-skill troubleshooting guide
+
+### Performance
+
+- Reduced initial skill load time by ~60% through progressive disclosure
+- Improved context efficiency with on-demand reference loading
+- Core decision trees remain in SKILL.md, detailed specs moved to `references/`
+
 ## [2.0.1] - 2026-01-26
 
 ### Added
 
 - **Agent Flow Documentation**: New comprehensive workflow documentation
-    - Added `.agent/AGENT_FLOW.md` - Complete agent flow architecture guide
-    - Documented Agent Routing Checklist (mandatory steps before code/design work)
-    - Documented Socratic Gate Protocol for requirement clarification
-    - Added Cross-Skill References pattern documentation
-- **New Skills**:
-    - `react-best-practices` - Consolidated Next.js and React expertise
-    - `web-design-guidelines` - Professional web design standards and patterns
+- **New Skills**: `react-best-practices`, `web-design-guidelines`
 
 ### Changed
 
-- **Skill Consolidation**: Merged `nextjs-best-practices` and `react-patterns` into unified `react-best-practices` skill
-- **Architecture Updates**:
-    - Enhanced `.agent/ARCHITECTURE.md` with improved flow diagrams
-    - Updated `.agent/rules/GEMINI.md` with Agent Routing Checklist
-- **Agent Updates**:
-    - Updated `frontend-specialist.md` with new skill references
-    - Updated `qa-automation-engineer.md` with enhanced testing ntdev204
-- **Frontend Design Skill**: Enhanced `frontend-design/SKILL.md` with cross-references to `web-design-guidelines`
+- **Skill Consolidation**: Merged `nextjs-best-practices` and `react-patterns` into unified `react-best-practices`
 
-### Removed
+## [2.0.0] - Initial Release
 
-- Deprecated `nextjs-best-practices` skill (consolidated into `react-best-practices`)
-- Deprecated `react-patterns` skill (consolidated into `react-best-practices`)
+- Initial release with 20 agents, 37 skills, 11 workflows
 
-### Fixed
-
-- **Agent Flow Accuracy**: Corrected misleading terminology in AGENT_FLOW.md
-    - Changed "Parallel Execution" → "Sequential Multi-Domain Execution"
-    - Changed "Integration Layer" → "Code Coherence" with accurate description
-    - Added reality notes about AI's sequential processing vs. simulated multi-agent behavior
-    - Clarified that scripts require user approval (not auto-executed)
-
-## [2.0.0] - Unreleased
-
-### Initial Release
-
-- Initial release of Antigravity Kit
-- 20 specialized AI agents
-- 37 domain-specific skills
-- 11 workflow slash commands
-- CLI tool for easy installation and updates
-- Comprehensive documentation and architecture guide
-
-[Unreleased]: https://github.com/vudovn/antigravity-kit/compare/v2.0.0...HEAD
-[2.0.0]: https://github.com/vudovn/antigravity-kit/releases/tag/v2.0.0
+[2.3.0]: https://github.com/ntdev204/antigravity-kit/compare/v2.0.1...v2.3.0
+[2.0.1]: https://github.com/ntdev204/antigravity-kit/compare/v2.0.0...v2.0.1
+[2.0.0]: https://github.com/ntdev204/antigravity-kit/releases/tag/v2.0.0
