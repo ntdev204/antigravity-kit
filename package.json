@@ -1,0 +1,39 @@
+{
+  "name": "@ntdev204/ag-kit",
+  "version": "1.0.0",
+  "description": "AI Agent templates - Skills, Agents, and Workflows for enhanced coding assistance",
+  "bin": {
+    "ag-kit": "./bin/ag-kit.js"
+  },
+  "files": [
+    "bin",
+    ".agent",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ntdev204/antigravity-kit.git"
+  },
+  "homepage": "https://github.com/ntdev204/antigravity-kit#readme",
+  "bugs": {
+    "url": "https://github.com/ntdev204/antigravity-kit/issues"
+  },
+  "keywords": [
+    "antigravity",
+    "ai",
+    "agent",
+    "gemini",
+    "skills",
+    "templates",
+    "cli",
+    "cursor",
+    "windsurf"
+  ],
+  "author": "ntdev204",
+  "license": "MIT",
+  "engines": {
+    "node": ">=12.0.0"
+  }
+}

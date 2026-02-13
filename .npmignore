@@ -1,0 +1,30 @@
+# Development files
+web/
+node_modules/
+.git/
+.vscode/
+.editorconfig
+
+# Documentation (kept in package)
+# README.md
+# LICENSE
+# CHANGELOG.md
+
+# Test files
+*.test.js
+*.spec.js
+test/
+tests/
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.travis.yml
+
+# Misc
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log*
+.env
+.env.local
