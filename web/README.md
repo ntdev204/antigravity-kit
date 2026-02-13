@@ -21,6 +21,14 @@ npm install -g @ntdev204/ag-kit
 ag-kit init
 ```
 
+### Update to Latest Version
+
+If you've installed globally, you can update anytime:
+
+```bash
+ag-kit update
+```
+
 This installs the `.agent` folder containing all templates into your project.
 
 ## Usage

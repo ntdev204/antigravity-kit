@@ -12,15 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **CLI Tool**: Added `ag-kit` command-line interface
     - Global installation: `npm install -g @ntdev204/ag-kit`
     - npx support: `npx @ntdev204/ag-kit init`
-    - Commands: `init`, `--help`, `--version`
+    - Commands: `init`, `update`, `--help`, `--version`
     - Automatic `.agent` folder installation to current project
-- **Package Publishing**: Published as `@ntdev204/ag-kit` on npm
-- **Documentation**: Added `PUBLISHING.md` guide for maintainers
-
-## [2.0.2] - 2026-02-04
-
-- **New Skills**:
-    - `rust-pro` - Master Rust 1.75+
+    - Self-update capability with `ag-kit update`
 - **Agent ntdev204**:
     - Updated `orchestrate.md` fix output turkish
 
