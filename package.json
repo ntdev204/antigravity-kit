@@ -1,6 +1,6 @@
 {
   "name": "@ntdev204/ag-kit",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "AI Agent templates - Skills, Agents, and Workflows for enhanced coding assistance",
   "bin": {
     "ag-kit": "./bin/ag-kit.js"
