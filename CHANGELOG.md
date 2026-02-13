@@ -17,6 +17,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Self-update capability with `ag-kit update`
 - **Agent ntdev204**:
     - Updated `orchestrate.md` fix output turkish
+- **New Skills**:
+    - `find-skills` - Helps users discover and install agent skills
+    - `mcp-builder` - MCP server building principles and patterns
+    - `vercel-react-best-practices` - Performance optimization guidelines from Vercel Engineering
+    - `webapp-testing` - E2E and deep audit testing strategies
 
 ## [2.0.1] - 2026-01-26
 
